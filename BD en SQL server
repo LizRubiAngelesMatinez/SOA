@@ -1,0 +1,677 @@
+USE [master]
+GO
+CREATE DATABASE [SOA]
+USE [SOA]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categoria](
+	[id_Categoria] [int] IDENTITY(1,1) NOT NULL,
+	[id_Imagen] [int] NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[Sub_Categoria] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Categoria] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comentario](
+	[id_Comentario] [int] IDENTITY(1,1) NOT NULL,
+	[id_Publicacion] [int] NOT NULL,
+	[Fecha] [date] NULL,
+	[Comentario] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Comentario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Curso](
+	[id_Curso] [int] IDENTITY(1,1) NOT NULL,
+	[id_Categoria] [int] NOT NULL,
+	[id_Imagen] [int] NOT NULL,
+	[Nombre] [varchar](80) NULL,
+	[Descripcion] [varchar](200) NULL,
+	[Nivel] [varchar](50) NULL,
+	[Precio] [int] NULL,
+	[Valoracion] [float] NULL,
+	[Duracion] [int] NULL,
+	[FecLanzamiento] [date] NULL,
+	[Estado] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Curso] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CursoUsuario](
+	[id_Curso] [int] NOT NULL,
+	[id_Usuario] [int] NOT NULL,
+	[Progreso] [float] NULL,
+	[Certificado] [varchar](100) NULL,
+	[Fecha_acceso] [date] NULL,
+ CONSTRAINT [PK_curso_usuario] PRIMARY KEY CLUSTERED 
+(
+	[id_Curso] ASC,
+	[id_Usuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Divisa](
+	[id_Divisa] [int] IDENTITY(1,1) NOT NULL,
+	[id_imagen] [int] NOT NULL,
+	[Tipo_Divisa] [varchar](100) NULL,
+	[Pais_Divisa] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Divisa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Imagen](
+	[id_Imagen] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[Link] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Imagen] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MetodoPago](
+	[id_MetodoPago] [int] IDENTITY(1,1) NOT NULL,
+	[id_Divisa] [int] NOT NULL,
+	[Nombre] [varchar](50) NULL,
+	[Descripcion] [varchar](100) NULL,
+	[Termino] [varchar](100) NULL,
+	[ValidacionTermino] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_MetodoPago] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Nivel](
+	[id_Nivel] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Nivel] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Notificacion](
+	[id_Notificacion] [int] IDENTITY(1,1) NOT NULL,
+	[id_Comentario] [int] NOT NULL,
+	[Titulo] [varchar](100) NULL,
+	[Fecha] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Notificacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pago](
+	[id_Pago] [int] IDENTITY(1,1) NOT NULL,
+	[id_Usuario] [int] NOT NULL,
+	[id_MetodoPago] [int] NOT NULL,
+	[Descripcion] [varchar](100) NULL,
+	[Total] [float] NULL,
+	[FechaPago] [date] NULL,
+	[Estado] [varchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Pago] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PagoCurso](
+	[id_Pago] [int] NOT NULL,
+	[id_Curso] [int] NOT NULL,
+ CONSTRAINT [PK_pago_Curso] PRIMARY KEY CLUSTERED 
+(
+	[id_Pago] ASC,
+	[id_Curso] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PagoPlan](
+	[id_Pago] [int] NOT NULL,
+	[id_Plan] [int] NOT NULL,
+ CONSTRAINT [PK_pago_plan] PRIMARY KEY CLUSTERED 
+(
+	[id_Pago] ASC,
+	[id_Plan] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pais](
+	[id_Pais] [int] IDENTITY(1,1) NOT NULL,
+	[id_imagen] [int] NOT NULL,
+	[Nombre] [varchar](50) NULL,
+	[Ciudad] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Pais] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Plan](
+	[id_Plan] [int] IDENTITY(1,1) NOT NULL,
+	[id_Imagen] [int] NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[Tiempo] [varchar](100) NULL,
+	[TipoSuscripcion] [varchar](100) NULL,
+	[Precio] [float] NULL,
+	[Descripcion] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Plan] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Publicacion](
+	[id_Publicacion] [int] IDENTITY(1,1) NOT NULL,
+	[id_Usuario] [int] NOT NULL,
+	[Titulo] [varchar](100) NULL,
+	[Contenido] [varchar](100) NULL,
+	[Fecha] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Publicacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuario](
+	[id_Usuario] [int] IDENTITY(1,1) NOT NULL,
+	[id_Pais] [int] NOT NULL,
+	[id_Imagen] [int] NOT NULL,
+	[id_Nivel] [int] NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[Apellido] [varchar](100) NULL,
+	[Correo] [varchar](100) NULL,
+	[Alias] [varchar](100) NULL,
+	[Contrasena] [varchar](100) NULL,
+	[Telefono] [varchar](100) NULL,
+	[Genero] [varchar](100) NULL,
+	[F_Nacimiento] [date] NULL,
+	[F_Registro] [date] NULL,
+	[Tipo_Usuario] [varchar](100) NULL,
+	[EDPuntos] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Usuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Video](
+	[id_Video] [int] IDENTITY(1,1) NOT NULL,
+	[id_Curso] [int] NOT NULL,
+	[id_Imagen] [int] NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[Link] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_Video] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Categoria] ON 
+
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (1, 13, N'Programacion  y tecnologia', N'Desarrollo de software')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (2, 13, N'Programacion  y tecnologia', N'Cloud e infraestructura')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (3, 13, N'Programacion  y tecnologia', N'Hardware')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (4, 13, N'Programacion  y tecnologia', N'Electronica')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (5, 13, N'Programacion  y tecnologia', N'Devops')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (6, 13, N'Programacion  y tecnologia', N'Diseño web')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (7, 13, N'Programacion  y tecnologia', N'Desarrollo movil')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (8, 13, N'Programacion  y tecnologia', N'Base de datos ')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (9, 13, N'Programacion  y tecnologia', N'Inteligencia artificial y data science')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (10, 13, N'Programacion  y tecnologia', N'Redes y seguridad')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (11, 13, N'Programacion  y tecnologia', N'Videojuegos')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (12, 13, N'Programacion  y tecnologia', N'Android')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (13, 13, N'Diseño y audiovisual', N'Diseño grafico')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (14, 13, N'Diseño y audiovisual', N'Ilustracion y dibujo')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (15, 13, N'Diseño y audiovisual', N'Edicion audiovisual')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (16, 13, N'Diseño y audiovisual', N'Diseño UX/UI')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (17, 13, N'Negocios y emprendimiento', N'Marketing y marketing digital')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (18, 13, N'Negocios y emprendimiento', N'Trabajo remoto / Teletrabajo')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (19, 13, N'Negocios y emprendimiento', N'Freelance')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (20, 13, N'Negocios y emprendimiento', N'Emprendimiento')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (21, 13, N'Negocios y emprendimiento', N'Finanzas')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (22, 13, N'Negocios y emprendimiento', N'Software y transformacion digital')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (23, 13, N'Desarrollo personal', N'Idiomas')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (24, 13, N'Desarrollo personal', N'Gestion ')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (25, 13, N'Desarrollo personal', N'Desarrollo Personal')
+INSERT [dbo].[Categoria] ([id_Categoria], [id_Imagen], [Nombre], [Sub_Categoria]) VALUES (26, 13, N'Edkids (niños)', N'Programacion')
+SET IDENTITY_INSERT [dbo].[Categoria] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Comentario] ON 
+
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (1, 1, CAST(N'2021-02-22' AS Date), N'Yo tambien quiero mi 18')
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (2, 1, CAST(N'2021-02-23' AS Date), N'Yo tambien quiero mi 18')
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (3, 2, CAST(N'2021-02-24' AS Date), N'Yo tambien quiero mi 19')
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (4, 2, CAST(N'2021-02-25' AS Date), N'Yo tambien quiero mi 19')
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (5, 2, CAST(N'2021-02-26' AS Date), N'Yo tambien quiero mi 19')
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (6, 3, CAST(N'2021-02-27' AS Date), N'Yo tambien quiero mi 20')
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (7, 3, CAST(N'2021-02-28' AS Date), N'Yo tambien quiero mi 20')
+INSERT [dbo].[Comentario] ([id_Comentario], [id_Publicacion], [Fecha], [Comentario]) VALUES (8, 3, CAST(N'2021-03-01' AS Date), N'Yo tambien quiero mi 20')
+SET IDENTITY_INSERT [dbo].[Comentario] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Curso] ON 
+
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (1, 6, 10, N'Raspberry Pi desde cero', N'Descubre cómo la programación y la electrónica se juntan en una herramienta llamada Raspberry Pi.', N'básico', 101, 4, 8, CAST(N'2021-04-23' AS Date), N'Proximo Lanzamiento')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (2, 6, 10, N'Equipos super productivos con Notion', N'Crea notas, documentos, wikis, gestiona tareas y comparte bases de datos con tu equipo usando todas las herramientas que te ofrece esta app.', N'básico', 87, 3.5, 7, CAST(N'2021-04-24' AS Date), N'Proximo Lanzamiento')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (3, 6, 10, N'Consumiendo APIs en .NET 5 con Blazor', N'Crea un proyecto en blazor con Net 5 aplicando seguridad y consumiendo un servicio rest con azure', N'intermedio', 76, 3, 4, CAST(N'2021-04-25' AS Date), N'Proximo Lanzamiento')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (4, 6, 10, N'.NET 5, Core Entity Framework', N'Desarrolla servicios REST y conéctalo con una base de datos Entity Framework Core. Usa la sintaxis de EFC y solicita la información que necesites directamente desde tu base de datos.', N'intermedio', 58, 4, 5, CAST(N'2021-06-26' AS Date), N'Proximo Lanzamiento')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (5, 6, 10, N'Expresiones regulares desde cero', N'Aprende a crear expresiones regulares que te permitan determinar patrones de búsqueda específicos en tus inputs, textos o string.', N'básico', 58, 3, 5, CAST(N'2021-06-27' AS Date), N'Proximo Lanzamiento')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (6, 2, 10, N'Roles y permisos en AWS con IAM y Organizations', N'Administra el acceso a los recursos y servicios a medida que escalan con AWS Identity and Access Management (IAM)', N'intermedio', 58, 4, 5, CAST(N'2020-06-28' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (7, 11, 12, N'Creacion de videojuegos con Canvas', N'Fusiona los recursos de la web y crea tu primer videojuego con JavaScript dentro de HTML.', N'intermedio', 126, 4.5, 6, CAST(N'2020-06-29' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (8, 6, 13, N'Introducción al Testing', N'Adquiere habilidades para hacer testing y crea software de alta calidad y confiabilidad.', N'intermedio', 58, 4.8, 2, CAST(N'2020-06-30' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (9, 6, 10, N'Node.js desde cero', N'Aprende a crear aplicaciones con JavaScript en el lado del servidor.', N'básico', 116, 4.7, 5, CAST(N'2020-06-15' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (10, 6, 11, N'Tu primer sitio estático con Python y Pelican', N'Desarrolla tu sitio web personal y portfolio con Pelican, el generador de sitio web estáticos más popular basado en Python.', N'básico', 117, 4.5, 8, CAST(N'2020-07-01' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (11, 6, 10, N'Ruby desde cero', N'Aprende el lenguaje sobre el que se fundamenta Ruby on Rails, uno de los frameworks más famosos de la programación web.', N'básico', 101, 4.7, 9, CAST(N'2020-07-02' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (12, 1, 10, N'VIM desde cero', N'Aprende los comandos básicos para utilizar el editor de texto más poderoso del mundo.', N'básico', 0, 4.6, 1, CAST(N'2020-07-03' AS Date), N'Gratis')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (13, 26, 10, N'JavaScript para niños', N'Aprende tu primer lenguaje de programación desde sus bases. Con él podrás darle instrucciones a tu computadora, crear pequeños programas y scripts.', N'básico', 72, 4.8, 6, CAST(N'2020-07-04' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (14, 2, 10, N'Diseña e implementa una arquitectura en AWS', N'Envía requerimientos y saca provecho del almacenamiento de AWS. Aprende a configurar una estructura básica para un sitio web mediano: un servidor o un dominio.', N'intermedio', 117, 4.5, 13, CAST(N'2020-07-05' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (15, 1, 10, N'Programación Lógica de Controladores (PLC)', N'Conoce a fondo Studio 5000, aprende a crear programas industriales complejos y domina la programación para PLC Allen Bradley.', N'intermedio', 130, 4, 10, CAST(N'2020-07-06' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (16, 6, 10, N'Scripting - Bash / Shell', N'Aprende a programar scripts interactivos para que tu consola haga procesos repetitivos por su propia cuenta eficientemente.', N'intermedio', 101, 4.3, 5, CAST(N'2020-07-07' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (17, 7, 10, N'Kotlin desde cero', N'Domina las bases Kotlin y aprende lo que puedes hacer al implementarlo con Java. Prepárate para crear tu primer proyecto Android con Kotlin.', N'básico', 116, 4.4, 8, CAST(N'2020-07-08' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (18, 2, 10, N'Azure Fundamentals', N'Aprende los fundamentos básicos de Azure, así como también a iniciar y crear tus propios servidores.', N'básico', 87, 4.5, 5, CAST(N'2020-07-09' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (19, 14, 10, N'Dibujo desde cero', N'Aprende nuevas técnicas de sombreado y perspectivas usando herramientas económicas como lápiz y bolígrafos. Dibuja desde figuras sencillas hasta rostros con distintas expresiones.', N'básico', 116, 4.8, 8, CAST(N'2020-07-10' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (20, 15, 10, N'Animaci?n de personajes con After Effects', N'Aprende a crear tus propios personajes desde un simple boceto y dales vida animada.', N'intermedio', 152, 4, 7, CAST(N'2020-07-11' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (21, 1, 10, N'HTML canvas desde cero', N'Aprende a crear tus propios gráficos 2D y 3D, animaciones y composiciones con JavaScript dentro de HTML.', N'intermedio', 72, 4.8, 4, CAST(N'2020-07-12' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (22, 1, 10, N'Java - Concurrencia y expresiones lambda', N'¡Mira lo nuevo que trae Java! Aprende a crear programas eficientes utilizando la concurrencia con Java. También, aprende a usar funciones Lambda y saca provecho de la programación funcional.', N'intermedio', 44, 4.5, 3, CAST(N'2020-07-13' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (23, 1, 10, N'Sapper - SSR con Svelte', N'Si te gustó crear apps con Svelte, este curso te gustará aún más, porque salió un nuevo framework llamado Sapper orientado al paradigma SSR, que trabaja de la mano con Svelte.', N'intermedio', 72, 4.5, 5, CAST(N'2020-07-14' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (24, 3, 10, N'Arduino desde cero', N'Aprende a usar la plataforma de desarrollo de hardware libre más usada de los sistemas embebidos y automatiza tus proyectos electrónicos.', N'básico', 130, 4.7, 14, CAST(N'2020-07-15' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (25, 1, 10, N'Python desde cero', N'Aprende los fundamentos de uno de los lenguajes más importantes de la actualidad y crea un administrador de contraseñas.', N'básico', 101, 4.7, 6, CAST(N'2020-07-16' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (26, 2, 10, N'CI/CD con Gitlab', N'Automatiza tus aplicaciones y evita esperar por el despliegue de tus aplicaciones.', N'básico', 44, 4.8, 4, CAST(N'2020-07-17' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (27, 1, 10, N'Crea tu propio Slack con SignalR', N'En este taller construirás una sala de chat con React.js y .NET Core desde 0, conectando backend con frontend y luego haciendo que se actualice en tiempo real usando SignalR.', N'básico', 126, 4.7, 4, CAST(N'2020-07-18' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (28, 7, 10, N'Crea y sube tu primera app a Google Play', N'Rick y Morty ser?n los protagonistas de tu propia app en Android Nativo que, además, podrás subir a Google Play.', N'intermedio', 227, 4.2, 8, CAST(N'2020-07-19' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (29, 1, 10, N'La ruta del desarrollador web', N'Aprende todos los roles y rutas que existen para ser un desarrollador web profesional en 2021.', N'básico', 0, 4.9, 4, CAST(N'2020-07-20' AS Date), N'Gratis')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (30, 2, 10, N'Fundamentos de AWS', N'Conviértete en un Arquitecto Cloud dominando el Cloud Provider líder por +10 años consecutivos.', N'básico', 144, 4.4, 12, CAST(N'2020-09-16' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (31, 11, 10, N'Unity desde cero', N'Domina la mejor herramienta de desarrollo de videojuegos en tiempo real y crea tu primer videojuego multiplataforma.', N'básico', 58, 4.5, 4, CAST(N'2020-09-17' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (32, 6, 10, N'Svelte desde cero', N'Desarrolla tus apps con la librería más reciente que utiliza un enfoque distinto al momento de crear interfaces de usuario.', N'básico', 58, 4.8, 4, CAST(N'2020-09-18' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (33, 26, 10, N'Programación para niños con Scratch', N'Ingresa al maravilloso mundo de la programación y desarrolla habilidades para el futuro.', N'básico', 101, 4.9, 8, CAST(N'2020-09-19' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (34, 6, 10, N'Spring desde cero', N'Domina los conceptos y funcionalidades básicas del framework más usado en Java y desarrolla servicios web de manera rápida y eficaz.', N'básico', 44, 4.4, 3, CAST(N'2020-09-20' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (35, 22, 10, N'Productividad y trabajo en equipo con Asana', N'Organiza y supervisa el trabajo y objetivos de equipos de todo tamaño desde cualquier lugar del mundo', N'intermedio', 152, 4.9, 7, CAST(N'2020-09-21' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (36, 22, 10, N'Latex desde cero', N'Aprende a producir documentos orientados al contenido técnico de manera r?pida y eficiente.', N'básico', 58, 4.6, 5, CAST(N'2020-09-22' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (37, 2, 10, N'Linux desde cero', N'Aprende a utilizar Linux y sus herramientas entendiendo los conceptos que hay detrás del sistema operativo.', N'básico', 101, 4.8, 4, CAST(N'2020-09-23' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (38, 23, 10, N'Gramática avanzada del inglés', N'Domina el futuro usando distintos tiempos gramaticales y practica tu fluidez a la hora de hablar.', N'avanzado', 116, 4.9, 8, CAST(N'2020-09-24' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (39, 6, 10, N'Server Side Render con Go', N'Domina el SSR con las herramientas que te ofrece Go, mejora el SEO y la carga de tus sitios web.', N'avanzado', 58, 5, 3, CAST(N'2020-09-25' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (40, 6, 10, N'Tu primera Progressive Web App (PWA 2020)', N'Moderniza y lleva tu sitio web al siguiente nivel, implementando lo mejor de las apps modernas.', N'básico', 116, 4.7, 10, CAST(N'2020-09-26' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (41, 20, 10, N'Graba y transmite cursos online', N'Aprende a crear cursos para YouTube, EDteam, Twitch u otras plataformas de la mano de nuestros expertos.', N'básico', 0, 4.9, 5, CAST(N'2020-09-27' AS Date), N'Gratis')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (42, 15, 10, N'Motion Graphics para redes sociales', N'Elabora gráficos animados para resaltar tus publicaciones en redes sociales.', N'básico', 58, 4.8, 10, CAST(N'2020-09-28' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (43, 6, 10, N'Symfony desde cero', N'Aprende a crear aplicaciones web con uno de los Frameworks más potentes del mercado.', N'básico', 116, 4.8, 7, CAST(N'2020-09-29' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (44, 9, 10, N'Introducción a Inteligencia Artificial', N'Aprende sobre los primeros pasos en la inteligencia artificial y las redes neuronales artificiales.', N'básico', 58, 4.3, 6, CAST(N'2020-10-19' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (45, 6, 10, N'Realidad aumentada en la web con AR.js', N'Crea experiencias de realidad aumentada que pueden ser vistas desde cualquier navegador web, utilizando A-Frame y AR.js', N'intermedio', 87, 4.5, 4, CAST(N'2020-10-20' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (46, 6, 10, N'Creación de APIs REST con .NET Core', N'Aprende la construcción de servicios REST para tus Apps utilizando uno de los frameworks más eficientes del mundo y orientado a la nube.', N'intermedio', 87, 4.5, 6, CAST(N'2020-10-21' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (47, 6, 10, N'Introducción a API REST (gratis)', N'Aprende todos los conceptos teóricos que hay en la arquitectura REST.', N'intermedio', 0, 4.8, 1, CAST(N'2020-10-22' AS Date), N'Gratis')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (48, 4, 10, N'Electrónica desde cero', N'Ingresa al mundo de la electrónica y comprende lo que pasa detrás de cada aparato electrónico que usas.', N'básico', 130, 4.8, 13, CAST(N'2020-10-23' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (49, 6, 10, N'JavaScript desde cero (2020)', N'Domina las bases del único lenguaje que te da la oportunidad de trabajar del lado del cliente y del lado del servidor.', N'básico', 87, 4.8, 8, CAST(N'2020-10-24' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (50, 6, 10, N'HTML Desde Cero', N'Domina el lenguaje con el que se construye toda la web', N'básico', 101, 4.9, 6, CAST(N'2020-10-25' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (51, 6, 10, N'Tu primera app con JavaScript y Python', N'Crea tu primer programa funcional en dos de los lenguajes con mayor demanda en el mercado, Python y JavaScript.', N'básico', 51, 4.8, 3, CAST(N'2020-10-26' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (52, 6, 10, N'Mi primera página web', N'Construye tu primer sitio web desde la primera línea de código hasta subirla a un servidor con tu propio dominio.', N'básico', 76, 4.8, 5, CAST(N'2020-10-27' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (53, 6, 10, N'PrestaShop desde cero', N'Construye desde cero tu sitio profesional de comercio electrónico y empieza a vender por internet', N'básico', 116, 4.9, 9, CAST(N'2020-11-20' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (54, 2, 10, N'Docker desde cero', N'Ingresa al mundo de los contenedores con la tecnología lider que utilizan las grandes empresas.', N'básico', 72, 4.8, 5, CAST(N'2020-11-21' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (55, 23, 10, N'Gramática del inglés', N'Aprende tiempos gramaticales más avanzados y ejercita tus habilidades de conversación.', N'intermedio', 101, 5, 7, CAST(N'2020-11-22' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (56, 6, 10, N'Testing con GO', N'Aprende a crear tests y medir la eficiencia de tus proyectos con Go', N'intermedio', 87, 4.9, 5, CAST(N'2020-11-23' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (57, 1, 10, N'Tu primera app con C#', N'En este taller aplicarás la teoría de los cursos de C# desde cero y POO en una aplicación de consola.', N'básico', 101, 4.8, 7, CAST(N'2020-11-24' AS Date), N'Taller')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (58, 6, 10, N'Introducción a la realidad virtual en la web', N'Crea experiencias de realidad virtual que pueden ser vistas desde cualquier navegador web.', N'básico', 101, 4.8, 7, CAST(N'2020-11-25' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (59, 7, 10, N'Flutter desde cero', N'Aprende a desarrollar aplicaciones móviles con el Framework desarrollado por Google.', N'básico', 101, 4.7, 11, CAST(N'2020-11-26' AS Date), N'Disponible')
+INSERT [dbo].[Curso] ([id_Curso], [id_Categoria], [id_Imagen], [Nombre], [Descripcion], [Nivel], [Precio], [Valoracion], [Duracion], [FecLanzamiento], [Estado]) VALUES (60, 6, 10, N'CSS desde cero (2020)', N'Haz hermosa la web con el único lenguaje creado para diseño.', N'básico', 116, 4.9, 10, CAST(N'2020-11-27' AS Date), N'Disponible')
+SET IDENTITY_INSERT [dbo].[Curso] OFF
+GO
+INSERT [dbo].[CursoUsuario] ([id_Curso], [id_Usuario], [Progreso], [Certificado], [Fecha_acceso]) VALUES (7, 2, 4, N'No Obtenido', CAST(N'2021-02-22' AS Date))
+INSERT [dbo].[CursoUsuario] ([id_Curso], [id_Usuario], [Progreso], [Certificado], [Fecha_acceso]) VALUES (8, 2, 2, N'Obtenido', CAST(N'2020-12-22' AS Date))
+INSERT [dbo].[CursoUsuario] ([id_Curso], [id_Usuario], [Progreso], [Certificado], [Fecha_acceso]) VALUES (9, 1, 4, N'No Obtenido', CAST(N'2021-02-09' AS Date))
+INSERT [dbo].[CursoUsuario] ([id_Curso], [id_Usuario], [Progreso], [Certificado], [Fecha_acceso]) VALUES (10, 1, 3.3, N'No Obtenido', CAST(N'2021-01-15' AS Date))
+INSERT [dbo].[CursoUsuario] ([id_Curso], [id_Usuario], [Progreso], [Certificado], [Fecha_acceso]) VALUES (11, 3, 9, N'Obtenido', CAST(N'2021-01-03' AS Date))
+INSERT [dbo].[CursoUsuario] ([id_Curso], [id_Usuario], [Progreso], [Certificado], [Fecha_acceso]) VALUES (12, 4, 1, N'Obtenido', CAST(N'2020-10-02' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[Divisa] ON 
+
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (1, 1, N'USD', N'ESTADOS UNIDOS')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (2, 2, N'CLP', N'CHILE')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (3, 3, N'ARS', N'ARGENTINA')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (4, 4, N'USD', N'ECUADOR')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (5, 5, N'BS', N'BOLIVIA')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (6, 6, N'SOLES', N'PERU')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (7, 7, N'MXN', N'MEXICO')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (8, 8, N'R', N'BRASIL')
+INSERT [dbo].[Divisa] ([id_Divisa], [id_imagen], [Tipo_Divisa], [Pais_Divisa]) VALUES (9, 9, N'COP', N'COLOMBIA')
+SET IDENTITY_INSERT [dbo].[Divisa] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Imagen] ON 
+
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (1, N'ESTADOS UNIDOS', N'https://i.ibb.co/hmqDN0R/ESTADOS-UNIDOS.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (2, N'CHILE', N'https://i.ibb.co/QY7SH2V/CHILE.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (3, N'ARGENTINA', N'https://i.ibb.co/rQGZgZb/ARGENTINA.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (4, N'ECUADOR', N'https://i.ibb.co/56K7PV2/ECUADOR.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (5, N'BOLIVIA', N'https://i.ibb.co/tc1jjzh/BOLIVIA.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (6, N'PERU', N'https://i.ibb.co/7NXBG8s/PERU.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (7, N'MEXICO', N'https://i.ibb.co/pdPck3V/MEXICO.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (8, N'BRASIL', N'https://i.ibb.co/bL4PLcf/BRASIL.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (9, N'COLOMBIA', N'https://i.ibb.co/NWvdvhw/COLOMBIA.jpg')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (10, N'Node.js desde cero', N'https://edteam-media.s3.amazonaws.com/courses/big/3cc48fa0-8327-4561-aa04-dafc3b799909.png')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (11, N'Tu primer sitio estático con Python y Pelican', N'https://edteam-media.s3.amazonaws.com/courses/big/8e6ca04d-3961-4f90-8e97-8ec1384c8363.png')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (12, N'Creacion de videojuegos con Canvas', N'https://edteam-media.s3.amazonaws.com/courses/big/f39cd39c-da23-44f1-b807-d9721ad7aa84.png')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (13, N'Introducción al Testing', N'https://edteam-media.s3.amazonaws.com/courses/big/5c7a8ada-4656-44d1-bc5e-b5fde2a5602c.png')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (14, N'Ruby desde cero', N'https://edteam-media.s3.amazonaws.com/courses/big/440bf729-4f2b-49a6-a0c7-7cf65a8bd31b.png')
+INSERT [dbo].[Imagen] ([id_Imagen], [Nombre], [Link]) VALUES (15, N'VIM desde cero', N'https://edteam-media.s3.amazonaws.com/courses/big/59fbcbab-90ee-4971-b804-a29ca9d5f484.png')
+SET IDENTITY_INSERT [dbo].[Imagen] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MetodoPago] ON 
+
+INSERT [dbo].[MetodoPago] ([id_MetodoPago], [id_Divisa], [Nombre], [Descripcion], [Termino], [ValidacionTermino]) VALUES (1, 1, N'Tarjeta de Crédito O Debito', N'Global (USD)', N'termino 1', 0)
+INSERT [dbo].[MetodoPago] ([id_MetodoPago], [id_Divisa], [Nombre], [Descripcion], [Termino], [ValidacionTermino]) VALUES (2, 5, N'Tarjeta de Crédito O Debito', N'Bolivia(BS)', N'termino 2', 0)
+INSERT [dbo].[MetodoPago] ([id_MetodoPago], [id_Divisa], [Nombre], [Descripcion], [Termino], [ValidacionTermino]) VALUES (3, 3, N'Tarjeta de Crédito O Debito', N'Argentina (ARS)', N'termino 3', 0)
+INSERT [dbo].[MetodoPago] ([id_MetodoPago], [id_Divisa], [Nombre], [Descripcion], [Termino], [ValidacionTermino]) VALUES (4, 1, N'PAYPAL', N'Global (USD)', N'termino 4', 0)
+INSERT [dbo].[MetodoPago] ([id_MetodoPago], [id_Divisa], [Nombre], [Descripcion], [Termino], [ValidacionTermino]) VALUES (5, 7, N'Deposito Bancario', N'Mexico (MXN)', N'termino 5', 0)
+INSERT [dbo].[MetodoPago] ([id_MetodoPago], [id_Divisa], [Nombre], [Descripcion], [Termino], [ValidacionTermino]) VALUES (6, 6, N'Deposito Bancario', N'Peru (SOLES)', N'termino 6', 0)
+INSERT [dbo].[MetodoPago] ([id_MetodoPago], [id_Divisa], [Nombre], [Descripcion], [Termino], [ValidacionTermino]) VALUES (7, 5, N'Deposito Bancario', N'Bolivia(BS)', N'termino 7', 0)
+SET IDENTITY_INSERT [dbo].[MetodoPago] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Nivel] ON 
+
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (1, N'Edy Bebe')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (2, N'Edy Cool')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (3, N'Edy Super')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (4, N'Edy Fantasma')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (5, N'Edy Among Us')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (6, N'Edy Mexicano')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (7, N'Mayor')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (8, N'Senior')
+INSERT [dbo].[Nivel] ([id_Nivel], [Nombre]) VALUES (9, N'Semi-Senior')
+SET IDENTITY_INSERT [dbo].[Nivel] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Notificacion] ON 
+
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (1, 1, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-21' AS Date))
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (2, 2, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-22' AS Date))
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (3, 3, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-23' AS Date))
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (4, 4, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-24' AS Date))
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (5, 5, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-25' AS Date))
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (6, 6, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-26' AS Date))
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (7, 7, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-27' AS Date))
+INSERT [dbo].[Notificacion] ([id_Notificacion], [id_Comentario], [Titulo], [Fecha]) VALUES (8, 8, N'El usuario X comento tu publicacion Y', CAST(N'2021-02-28' AS Date))
+SET IDENTITY_INSERT [dbo].[Notificacion] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Pago] ON 
+
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (1, 1, 1, N'Pago de curso Creacion de videojuegos con Canvas', 0, CAST(N'2021-04-15' AS Date), N'PAGADO')
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (2, 1, 2, N'Pago Mensual de  Suscripcion Premium', 112.48, CAST(N'2020-10-08' AS Date), N'ANULADO')
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (3, 2, 6, N'Pago de curso Spring desde cero', 44, CAST(N'2020-06-10' AS Date), N'EN PROCESO')
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (4, 2, 7, N'Pago Semestral de Suscripcion Premiun', 607.37, CAST(N'2020-03-15' AS Date), N'PAGADO')
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (5, 3, 5, N'Pago Semestral de Suscripcion Premiun', 607.37, CAST(N'2021-10-08' AS Date), N'ANULADO')
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (6, 3, 1, N'Pago de curso JavaScript para ni?os', 72, CAST(N'2019-08-20' AS Date), N'PAGADO')
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (7, 4, 1, N'Pago Anual de Suscripcion Premium', 971.79, CAST(N'2019-12-24' AS Date), N'PAGADO')
+INSERT [dbo].[Pago] ([id_Pago], [id_Usuario], [id_MetodoPago], [Descripcion], [Total], [FechaPago], [Estado]) VALUES (8, 4, 7, N'Pago Anual de Suscripcion Estudiante', 607.37, CAST(N'2020-04-30' AS Date), N'PAGADO')
+SET IDENTITY_INSERT [dbo].[Pago] OFF
+GO
+INSERT [dbo].[PagoCurso] ([id_Pago], [id_Curso]) VALUES (1, 6)
+INSERT [dbo].[PagoCurso] ([id_Pago], [id_Curso]) VALUES (3, 3)
+INSERT [dbo].[PagoCurso] ([id_Pago], [id_Curso]) VALUES (7, 1)
+GO
+INSERT [dbo].[PagoPlan] ([id_Pago], [id_Plan]) VALUES (2, 2)
+INSERT [dbo].[PagoPlan] ([id_Pago], [id_Plan]) VALUES (4, 3)
+INSERT [dbo].[PagoPlan] ([id_Pago], [id_Plan]) VALUES (5, 3)
+INSERT [dbo].[PagoPlan] ([id_Pago], [id_Plan]) VALUES (7, 4)
+INSERT [dbo].[PagoPlan] ([id_Pago], [id_Plan]) VALUES (8, 5)
+GO
+SET IDENTITY_INSERT [dbo].[Pais] ON 
+
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (1, 6, N'PERU', N'Lima')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (2, 4, N'ECUADOR', N'QUITO')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (3, 3, N'ARGENTINA', N'Buenos Aires')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (4, 2, N'CHILE', N'Santiago')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (5, 7, N'MEXICO', N'Ciudad de Mexico')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (6, 8, N'BRASIL', N'Sao Paulo')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (7, 1, N'ESTADOS UNIDOS', N'Washington')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (8, 5, N'BOLIVIA', N'Sucre')
+INSERT [dbo].[Pais] ([id_Pais], [id_imagen], [Nombre], [Ciudad]) VALUES (9, 9, N'COLOMBIA', N'Bogota')
+SET IDENTITY_INSERT [dbo].[Pais] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Plan] ON 
+
+INSERT [dbo].[Plan] ([id_Plan], [id_Imagen], [Nombre], [Tiempo], [TipoSuscripcion], [Precio], [Descripcion]) VALUES (1, 10, N'Plan Gratis', N'Indefinido', N'Gratis', 0, N'Estudia gratis,obten certificados y comprueba tu experiencia')
+INSERT [dbo].[Plan] ([id_Plan], [id_Imagen], [Nombre], [Tiempo], [TipoSuscripcion], [Precio], [Descripcion]) VALUES (2, 10, N'Plan Premium', N'Mensual', N'Premium', 112.48, N'Impulsa tu carrera con acceso a todos los cursos y especialidades')
+INSERT [dbo].[Plan] ([id_Plan], [id_Imagen], [Nombre], [Tiempo], [TipoSuscripcion], [Precio], [Descripcion]) VALUES (3, 10, N'Plan Premium', N'Semestral', N'Premium', 607.37, N'Impulsa tu carrera con acceso a todos los cursos y especialidades')
+INSERT [dbo].[Plan] ([id_Plan], [id_Imagen], [Nombre], [Tiempo], [TipoSuscripcion], [Precio], [Descripcion]) VALUES (4, 10, N'Plan Premium', N'Anual', N'Premium', 971.79, N'Impulsa tu carrera con acceso a todos los cursos y especialidades')
+INSERT [dbo].[Plan] ([id_Plan], [id_Imagen], [Nombre], [Tiempo], [TipoSuscripcion], [Precio], [Descripcion]) VALUES (5, 10, N'Plan Estudiantes', N'Anual', N'Estudiantes', 607.37, N'Haz despegar tu carrera y asegura tu seguro futuro con un gran descuento')
+SET IDENTITY_INSERT [dbo].[Plan] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Publicacion] ON 
+
+INSERT [dbo].[Publicacion] ([id_Publicacion], [id_Usuario], [Titulo], [Contenido], [Fecha]) VALUES (1, 1, N'Publicación 1', N'Profesor quiero mi 18', CAST(N'2021-02-20' AS Date))
+INSERT [dbo].[Publicacion] ([id_Publicacion], [id_Usuario], [Titulo], [Contenido], [Fecha]) VALUES (2, 2, N'Publicación 2', N'Profesor quiero mi 19', CAST(N'2021-02-21' AS Date))
+INSERT [dbo].[Publicacion] ([id_Publicacion], [id_Usuario], [Titulo], [Contenido], [Fecha]) VALUES (3, 3, N'Publicación 3', N'Profesor quiero mi 20', CAST(N'2021-02-22' AS Date))
+SET IDENTITY_INSERT [dbo].[Publicacion] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] ON 
+
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (1, 1, 11, 1, N'Mario', N'Fernandez', N'mfer@live.com', N'Mario', N'patoamarillo', N'987450921', N'Masculino', CAST(N'1997-05-25' AS Date), CAST(N'2020-02-20' AS Date), N'Alumno', 90)
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (2, 2, 11, 2, N'Walter', N'Silva', N'waltersilva00297@gmail.com', N'Walter', N'silva123', N'989846416', N'Masculino', CAST(N'1999-12-15' AS Date), CAST(N'2020-10-15' AS Date), N'Alumno', 200)
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (3, 3, 11, 3, N'Maribel', N'Zavaleta', N'maribel.mcz@gmail.com', N'Maribel', N'zavaleta34', N'985462261', N'Femenino', CAST(N'1997-05-27' AS Date), CAST(N'2021-04-27' AS Date), N'Alumno', 400)
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (4, 4, 11, 4, N'Raul', N'Mendizabal', N'raaf_44@hotmail.com', N'Raul', N'barcelona23', N'965213584', N'Masculino', CAST(N'1995-04-27' AS Date), CAST(N'2021-02-28' AS Date), N'Alumno', 600)
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (5, 1, 11, 9, N'Lizbeth', N'Angeles', N'langeles@gmail.com', N'Angel', N'tuangelitax100pre', N'976135647', N'Femenino', CAST(N'1992-02-29' AS Date), CAST(N'2020-08-17' AS Date), N'Alumno', 845)
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (6, 5, 11, 6, N'Pedro', N'Cuadros', N'pcuadros@gmail.com', N'Pedro', N'cuadros345', N'936541287', N'Masculino', CAST(N'1998-09-16' AS Date), CAST(N'2021-02-24' AS Date), N'Profesor', 0)
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (7, 6, 11, 7, N'Steven', N'Pala', N'spala@gmail.com', N'Steven', N'pala123', N'902348798', N'Masculino', CAST(N'1998-05-26' AS Date), CAST(N'2020-05-14' AS Date), N'Profesor', 0)
+INSERT [dbo].[Usuario] ([id_Usuario], [id_Pais], [id_Imagen], [id_Nivel], [Nombre], [Apellido], [Correo], [Alias], [Contrasena], [Telefono], [Genero], [F_Nacimiento], [F_Registro], [Tipo_Usuario], [EDPuntos]) VALUES (8, 7, 11, 8, N'Valia', N'Vicuña', N'vvicuña@gmail.com', N'Valia', N'vicuña948', N'936598746', N'Femenino', CAST(N'1999-07-13' AS Date), CAST(N'2020-04-23' AS Date), N'Profesor', 0)
+SET IDENTITY_INSERT [dbo].[Usuario] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Video] ON 
+
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (1, 1, 12, N'Curso1_Parte1', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (2, 1, 12, N'Curso1_Parte2', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (3, 1, 12, N'Curso1_Parte3', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (4, 1, 12, N'Curso1_Parte4', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (5, 1, 12, N'Curso1_Parte5', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (6, 1, 12, N'Curso1_Parte6', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (7, 8, 12, N'Curso8_Parte1', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (8, 8, 12, N'Curso8_Parte2', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (9, 8, 12, N'Curso8_Parte3', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (10, 8, 12, N'Curso8_Parte4', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (11, 8, 12, N'Curso8_Parte5', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (12, 8, 12, N'Curso8_Parte6', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (13, 8, 12, N'Curso8_Parte7', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (14, 8, 12, N'Curso8_Parte8', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (15, 8, 12, N'Curso8_Parte9', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (16, 15, 12, N'Curso15_Parte1', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (17, 15, 12, N'Curso15_Parte2', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (18, 15, 12, N'Curso15_Parte3', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (19, 15, 12, N'Curso15_Parte4', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (20, 15, 12, N'Curso15_Parte5', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (21, 15, 12, N'Curso15_Parte6', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (22, 15, 12, N'Curso15_Parte7', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (23, 15, 12, N'Curso15_Parte8', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (24, 15, 12, N'Curso15_Parte9', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (25, 15, 12, N'Curso15_Parte10', N'https://www.youtube.com/user/escueladigitalperu')
+INSERT [dbo].[Video] ([id_Video], [id_Curso], [id_Imagen], [Nombre], [Link]) VALUES (26, 15, 12, N'Curso15_Parte11', N'https://www.youtube.com/user/escueladigitalperu')
+SET IDENTITY_INSERT [dbo].[Video] OFF
+GO
+ALTER TABLE [dbo].[Categoria]  WITH CHECK ADD  CONSTRAINT [imagen_categoria_fk] FOREIGN KEY([id_Imagen])
+REFERENCES [dbo].[Imagen] ([id_Imagen])
+GO
+ALTER TABLE [dbo].[Categoria] CHECK CONSTRAINT [imagen_categoria_fk]
+GO
+ALTER TABLE [dbo].[Comentario]  WITH CHECK ADD  CONSTRAINT [publicacion_comentario_fk] FOREIGN KEY([id_Publicacion])
+REFERENCES [dbo].[Publicacion] ([id_Publicacion])
+GO
+ALTER TABLE [dbo].[Comentario] CHECK CONSTRAINT [publicacion_comentario_fk]
+GO
+ALTER TABLE [dbo].[Curso]  WITH CHECK ADD  CONSTRAINT [categoria_curso_fk] FOREIGN KEY([id_Categoria])
+REFERENCES [dbo].[Categoria] ([id_Categoria])
+GO
+ALTER TABLE [dbo].[Curso] CHECK CONSTRAINT [categoria_curso_fk]
+GO
+ALTER TABLE [dbo].[Curso]  WITH CHECK ADD  CONSTRAINT [imagen_curso_fk] FOREIGN KEY([id_Imagen])
+REFERENCES [dbo].[Imagen] ([id_Imagen])
+GO
+ALTER TABLE [dbo].[Curso] CHECK CONSTRAINT [imagen_curso_fk]
+GO
+ALTER TABLE [dbo].[CursoUsuario]  WITH CHECK ADD  CONSTRAINT [FK_curso_curso_usuario] FOREIGN KEY([id_Curso])
+REFERENCES [dbo].[Curso] ([id_Curso])
+GO
+ALTER TABLE [dbo].[CursoUsuario] CHECK CONSTRAINT [FK_curso_curso_usuario]
+GO
+ALTER TABLE [dbo].[CursoUsuario]  WITH CHECK ADD  CONSTRAINT [FK_usuario_curso_usuario] FOREIGN KEY([id_Usuario])
+REFERENCES [dbo].[Usuario] ([id_Usuario])
+GO
+ALTER TABLE [dbo].[CursoUsuario] CHECK CONSTRAINT [FK_usuario_curso_usuario]
+GO
+ALTER TABLE [dbo].[Divisa]  WITH CHECK ADD  CONSTRAINT [imagen_divisa_fk] FOREIGN KEY([id_imagen])
+REFERENCES [dbo].[Imagen] ([id_Imagen])
+GO
+ALTER TABLE [dbo].[Divisa] CHECK CONSTRAINT [imagen_divisa_fk]
+GO
+ALTER TABLE [dbo].[MetodoPago]  WITH CHECK ADD  CONSTRAINT [divisa_metodo_pago_fk] FOREIGN KEY([id_Divisa])
+REFERENCES [dbo].[Divisa] ([id_Divisa])
+GO
+ALTER TABLE [dbo].[MetodoPago] CHECK CONSTRAINT [divisa_metodo_pago_fk]
+GO
+ALTER TABLE [dbo].[Notificacion]  WITH CHECK ADD  CONSTRAINT [comentario_notificacion_fk] FOREIGN KEY([id_Comentario])
+REFERENCES [dbo].[Comentario] ([id_Comentario])
+GO
+ALTER TABLE [dbo].[Notificacion] CHECK CONSTRAINT [comentario_notificacion_fk]
+GO
+ALTER TABLE [dbo].[Pago]  WITH CHECK ADD  CONSTRAINT [metodo_pago_pago_fk] FOREIGN KEY([id_MetodoPago])
+REFERENCES [dbo].[MetodoPago] ([id_MetodoPago])
+GO
+ALTER TABLE [dbo].[Pago] CHECK CONSTRAINT [metodo_pago_pago_fk]
+GO
+ALTER TABLE [dbo].[Pago]  WITH CHECK ADD  CONSTRAINT [usuario_pago_fk] FOREIGN KEY([id_Usuario])
+REFERENCES [dbo].[Usuario] ([id_Usuario])
+GO
+ALTER TABLE [dbo].[Pago] CHECK CONSTRAINT [usuario_pago_fk]
+GO
+ALTER TABLE [dbo].[PagoCurso]  WITH CHECK ADD  CONSTRAINT [FK_curso_pago_curso] FOREIGN KEY([id_Curso])
+REFERENCES [dbo].[Curso] ([id_Curso])
+GO
+ALTER TABLE [dbo].[PagoCurso] CHECK CONSTRAINT [FK_curso_pago_curso]
+GO
+ALTER TABLE [dbo].[PagoCurso]  WITH CHECK ADD  CONSTRAINT [FK_pago_pago_curso] FOREIGN KEY([id_Pago])
+REFERENCES [dbo].[Pago] ([id_Pago])
+GO
+ALTER TABLE [dbo].[PagoCurso] CHECK CONSTRAINT [FK_pago_pago_curso]
+GO
+ALTER TABLE [dbo].[PagoPlan]  WITH CHECK ADD  CONSTRAINT [FK_pago_pago_plan] FOREIGN KEY([id_Pago])
+REFERENCES [dbo].[Pago] ([id_Pago])
+GO
+ALTER TABLE [dbo].[PagoPlan] CHECK CONSTRAINT [FK_pago_pago_plan]
+GO
+ALTER TABLE [dbo].[PagoPlan]  WITH CHECK ADD  CONSTRAINT [FK_plan_pago_plan] FOREIGN KEY([id_Plan])
+REFERENCES [dbo].[Plan] ([id_Plan])
+GO
+ALTER TABLE [dbo].[PagoPlan] CHECK CONSTRAINT [FK_plan_pago_plan]
+GO
+ALTER TABLE [dbo].[Pais]  WITH CHECK ADD  CONSTRAINT [imagen_pais_fk] FOREIGN KEY([id_imagen])
+REFERENCES [dbo].[Imagen] ([id_Imagen])
+GO
+ALTER TABLE [dbo].[Pais] CHECK CONSTRAINT [imagen_pais_fk]
+GO
+ALTER TABLE [dbo].[Plan]  WITH CHECK ADD  CONSTRAINT [imagen_plan_fk] FOREIGN KEY([id_Imagen])
+REFERENCES [dbo].[Imagen] ([id_Imagen])
+GO
+ALTER TABLE [dbo].[Plan] CHECK CONSTRAINT [imagen_plan_fk]
+GO
+ALTER TABLE [dbo].[Publicacion]  WITH CHECK ADD  CONSTRAINT [usuario_publicacion_fk] FOREIGN KEY([id_Usuario])
+REFERENCES [dbo].[Usuario] ([id_Usuario])
+GO
+ALTER TABLE [dbo].[Publicacion] CHECK CONSTRAINT [usuario_publicacion_fk]
+GO
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [imagen_usuario_fk] FOREIGN KEY([id_Imagen])
+REFERENCES [dbo].[Imagen] ([id_Imagen])
+GO
+ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [imagen_usuario_fk]
+GO
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [nivel_usuario_fk] FOREIGN KEY([id_Nivel])
+REFERENCES [dbo].[Nivel] ([id_Nivel])
+GO
+ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [nivel_usuario_fk]
+GO
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [pais_usuario_fk] FOREIGN KEY([id_Pais])
+REFERENCES [dbo].[Pais] ([id_Pais])
+GO
+ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [pais_usuario_fk]
+GO
+ALTER TABLE [dbo].[Video]  WITH CHECK ADD  CONSTRAINT [curso_video_fk] FOREIGN KEY([id_Curso])
+REFERENCES [dbo].[Curso] ([id_Curso])
+GO
+ALTER TABLE [dbo].[Video] CHECK CONSTRAINT [curso_video_fk]
+GO
+ALTER TABLE [dbo].[Video]  WITH CHECK ADD  CONSTRAINT [imagen_video_fk] FOREIGN KEY([id_Imagen])
+REFERENCES [dbo].[Imagen] ([id_Imagen])
+GO
+ALTER TABLE [dbo].[Video] CHECK CONSTRAINT [imagen_video_fk]
+GO
+USE [master]
+GO
+ALTER DATABASE [SOA] SET  READ_WRITE 
+GO
